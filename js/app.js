@@ -1,6 +1,6 @@
 let myApp = angular.module('hbwebclient', ['ngRoute']);
 
-myApp.config(($httpProvider, $routeProvider) => {
+myApp.config(function($httpProvider, $routeProvider) {
 
     $httpProvider.interceptors.push('TokenInterceptor');
 
@@ -46,12 +46,12 @@ myApp.config(($httpProvider, $routeProvider) => {
 
 });
 
-myApp.run(($rootScope, $window, $location, AuthenticationFactory) => {
+myApp.run(function($rootScope, $window, $location, AuthenticationFactory) {
 
 // when the page refreshes, check if the user is already logged in
     AuthenticationFactory.check();
 
-    $rootScope.$on("$routeChangeStart", (event, nextRoute, currentRoute) => {
+    $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
 
         if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationFactory.isLogged) {
             $location.path("/login");
@@ -63,7 +63,7 @@ myApp.run(($rootScope, $window, $location, AuthenticationFactory) => {
 
     });
 
-    $rootScope.$on('$routeChangeSuccess', (event, nextRoute, currentRoute) => {
+    $rootScope.$on('$routeChangeSuccess', function(event, nextRoute, currentRoute) {
 
         $rootScope.showMenu = AuthenticationFactory.isLogged;
         $rootScope.role = AuthenticationFactory.userRole;

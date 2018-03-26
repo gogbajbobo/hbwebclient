@@ -1,7 +1,8 @@
-var gulp = require('gulp'),
-  connect = require('gulp-connect');
+const
+    gulp = require('gulp'),
+    connect = require('gulp-connect');
 
-var paths = {
+const paths = {
   app: './',
   src: ['./*.html', './html/*.html', './css/*.css', './js/*.js']
 };

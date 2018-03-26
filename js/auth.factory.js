@@ -1,4 +1,4 @@
-myApp.factory('AuthenticationFactory', $window => {
+myApp.factory('AuthenticationFactory', function($window) {
 
     return auth = {
         isLogged: false,
@@ -14,18 +14,20 @@ myApp.factory('AuthenticationFactory', $window => {
 
 });
 
-myApp.factory('UserAuthFactory', ($window, $location, $http, AuthenticationFactory) => {
+myApp.factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
 
     return {
-        login: (username, password) => {
+        login: function(username, password) {
 
-            return $http.post('http://localhost:3000/login', {
+            return $http.post('http://localhost:8887/login', {
                 username: username,
                 password: password
+            }).catch(err => {
+                console.log(err);
             });
 
         },
-        logout: () => {
+        logout: function() {
 
             if (AuthenticationFactory.isLogged) {
 
@@ -46,10 +48,10 @@ myApp.factory('UserAuthFactory', ($window, $location, $http, AuthenticationFacto
 
 });
 
-myApp.factory('TokenInterceptor', ($q, $window) => {
+myApp.factory('TokenInterceptor', function($q, $window) {
 
     return {
-        request: config => {
+        request: function(config) {
 
             config.headers = config.headers || {};
 

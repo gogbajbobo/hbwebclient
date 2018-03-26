@@ -7,7 +7,7 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
             password: 'pass123'
         };
 
-        $scope.login = () => {
+        $scope.login = function() {
 
             const
                 username = $scope.user.username,
@@ -29,7 +29,10 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
 
                 }).error(status => {
                     alert('Oops something went wrong!' + status);
+                }).catch(err => {
+                    console.log(err);
                 });
+
             } else {
                 alert('Invalid credentials');
             }
