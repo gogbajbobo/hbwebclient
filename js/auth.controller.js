@@ -3,8 +3,8 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
     function ($scope, $window, $location, UserAuthFactory, AuthenticationFactory) {
 
         $scope.user = {
-            username: 'arvind@myApp.com',
-            password: 'pass123'
+            username: 'grimax1',
+            password: '12345'
         };
 
         $scope.login = function() {
@@ -15,7 +15,9 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
 
             if (username !== undefined && password !== undefined) {
 
-                UserAuthFactory.login(username, password).success(data => {
+                UserAuthFactory.login(username, password).then(response => {
+
+                    const data = response.data;
 
                     AuthenticationFactory.isLogged = true;
                     AuthenticationFactory.user = data.user.username;
@@ -27,8 +29,6 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
 
                     $location.path("/");
 
-                }).error(status => {
-                    alert('Oops something went wrong!' + status);
                 }).catch(err => {
                     console.log(err);
                 });
