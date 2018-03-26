@@ -1,9 +1,11 @@
-myApp.controller("HeaderCtrl", ['$scope', '$location',
+myApp.controller("HeaderCtrl", ['$scope', '$location', 'UserAuthFactory',
 
-    ($scope, $location) => {
+    ($scope, $location, UserAuthFactory) => {
+
         $scope.isActive = route => route === $location.path();
-    }
+        $scope.logout = () => { UserAuthFactory.logout(); }
 
+    }
 ]);
 
 myApp.controller("HomeCtrl", ['$scope',
