@@ -1,7 +1,8 @@
 myApp.factory('todosFactory', function($http) {
   /** https://docs.angularjs.org/guide/providers **/
-  var urlBase = 'http://mean-todo-app.herokuapp.com/api/todos';
-  var _todosFactory = {};
+  
+  const urlBase = 'http://mean-todo-app.herokuapp.com/api/todos';
+  const _todosFactory = {};
 
   _todosFactory.getTodos = function() {
     return $http.get(urlBase);
@@ -20,4 +21,5 @@ myApp.factory('todosFactory', function($http) {
   };
 
   return _todosFactory;
+
 });
