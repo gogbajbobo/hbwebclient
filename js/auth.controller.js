@@ -1,6 +1,6 @@
-myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactory', 'AuthenticationFactory',
+myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactory', 'AuthenticationFactory', 'BroadcastService',
 
-    function ($scope, $window, $location, UserAuthFactory, AuthenticationFactory) {
+    function ($scope, $window, $location, UserAuthFactory, AuthenticationFactory, BroadcastService) {
 
         $scope.user = {
             username: 'grimax1',
@@ -26,6 +26,8 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
                     $window.sessionStorage.token = data.token;
                     $window.sessionStorage.user = data.user.username; // to fetch the user details on refresh
                     $window.sessionStorage.userRole = data.user.role; // to fetch the user details on refresh
+
+                    BroadcastService.userLoggedIn();
 
                     $location.path("/");
 

@@ -2,6 +2,16 @@ myApp.controller("HeaderCtrl", HeaderController);
 
 function HeaderController($scope, $location, UserAuthFactory) {
 
+    $scope.$on('login', function () {
+        console.log('login');
+        $scope.username = UserAuthFactory.username;
+    });
+
+    $scope.$on('logout', function () {
+        console.log('logout');
+        $scope.username = undefined;
+    });
+
     $scope.isActive = route => route === $location.path();
     $scope.logout = () => { UserAuthFactory.logout(); }
     $scope.username = UserAuthFactory.username;

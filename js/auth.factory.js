@@ -14,7 +14,7 @@ myApp.factory('AuthenticationFactory', function($window) {
 
 });
 
-myApp.factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
+myApp.factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory, BroadcastService) {
 
     return {
         login: function(username, password) {
@@ -38,6 +38,8 @@ myApp.factory('UserAuthFactory', function($window, $location, $http, Authenticat
                 delete $window.sessionStorage.token;
                 delete $window.sessionStorage.user;
                 delete $window.sessionStorage.userRole;
+
+                BroadcastService.userLoggedOut();
 
                 $location.path("/login");
 

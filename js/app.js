@@ -2,6 +2,20 @@ let myApp = angular.module('hbwebclient', ['ngRoute']);
 
 myApp.config(configMyApp);
 myApp.run(runMyApp);
+myApp.factory("BroadcastService", broadcastService);
+
+function broadcastService($rootScope){
+
+    return broadcastService = {
+        userLoggedIn: () => {
+            $rootScope.$broadcast('login');
+        },
+        userLoggedOut: () => {
+            $rootScope.$broadcast('logout');
+        }
+    };
+
+}
 
 function configMyApp($httpProvider, $routeProvider) {
 
