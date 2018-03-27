@@ -1,11 +1,11 @@
 myApp.controller('LoginCtrl', LoginController);
 
-function LoginController($scope, $window, $location, UserAuthFactory, AuthenticationFactory, BroadcastService) {
+function LoginController($scope, $window, $location, AuthenticationFactory, BroadcastService, AuthService) {
 
-    $scope.user = {
-        username: 'grimax1',
-        password: '12345'
-    };
+    // $scope.user = {
+    //     // username: 'grimax',
+    //     // password: '12345'
+    // };
 
     $scope.login = () => {
 
@@ -15,9 +15,11 @@ function LoginController($scope, $window, $location, UserAuthFactory, Authentica
 
         if (username !== undefined && password !== undefined) {
 
-            UserAuthFactory.login(username, password).then(response => {
+            AuthService.login(username, password).then(response => {
 
                 const data = response.data;
+
+                AuthService.user = data.user;
 
                 AuthenticationFactory.isLogged = true;
                 AuthenticationFactory.user = data.user.username;
