@@ -43,7 +43,8 @@ myApp.factory('UserAuthFactory', function($window, $location, $http, Authenticat
 
             }
 
-        }
+        },
+        username: AuthenticationFactory.user
     }
 
 });
