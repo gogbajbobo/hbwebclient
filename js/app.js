@@ -1,4 +1,4 @@
-let myApp = angular.module('hbwebclient', ['ngRoute']);
+const myApp = angular.module('hbwebclient', ['ngRoute']);
 
 myApp.config(configMyApp);
 myApp.run(runMyApp);
@@ -36,9 +36,9 @@ function configMyApp($httpProvider, $routeProvider) {
                 requiredLogin: true
             }
         })
-        .when('/page1', {
-            templateUrl: 'html/page1.html',
-            controller: 'Page1Ctrl',
+        .when('/userlist', {
+            templateUrl: 'html/userlist.html',
+            controller: 'UserListCtrl',
             access: {
                 requiredLogin: true
             }
@@ -65,13 +65,14 @@ function configMyApp($httpProvider, $routeProvider) {
 
 function runMyApp($rootScope, $window, $location, AuthenticationFactory) {
 
-// when the page refreshes, check if the user is already logged in
     AuthenticationFactory.check();
 
-    $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+    $rootScope.$on("$routeChangeStart", (event, nextRoute, currentRoute) => {
 
         if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationFactory.isLogged) {
+
             $location.path("/login");
+
         } else {
 
             if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.sessionStorage.user;
@@ -80,7 +81,7 @@ function runMyApp($rootScope, $window, $location, AuthenticationFactory) {
 
     });
 
-    $rootScope.$on('$routeChangeSuccess', function(event, nextRoute, currentRoute) {
+    $rootScope.$on('$routeChangeSuccess', (event, nextRoute, currentRoute) => {
 
         $rootScope.showMenu = AuthenticationFactory.isLogged;
         $rootScope.role = AuthenticationFactory.userRole;

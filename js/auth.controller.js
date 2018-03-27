@@ -7,7 +7,7 @@ function LoginController($scope, $window, $location, UserAuthFactory, Authentica
         password: '12345'
     };
 
-    $scope.login = function() {
+    $scope.login = () => {
 
         const
             username = $scope.user.username,

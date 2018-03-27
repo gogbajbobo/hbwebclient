@@ -1,4 +1,6 @@
 myApp.controller("HeaderCtrl", HeaderController);
+myApp.controller("HomeCtrl", HomeController);
+myApp.controller("UserListCtrl", UserListController);
 
 function HeaderController($scope, $location, UserAuthFactory) {
 
@@ -18,13 +20,13 @@ function HeaderController($scope, $location, UserAuthFactory) {
 
 }
 
-myApp.controller("HomeCtrl", ['$scope',
+function HomeController($scope) {
+    $scope.name = "Home Controller";
+}
 
-    function($scope) {
-        $scope.name = "Home Controller";
-    }
-
-]);
+function UserListController($scope) {
+    $scope.name = "User List Controller";
+}
 
 myApp.controller("Page1Ctrl", ['$scope',
 
