@@ -1,4 +1,8 @@
-myApp.factory('AuthenticationFactory', function($window) {
+myApp.factory('AuthenticationFactory', AuthenticationFactory);
+myApp.factory('UserAuthFactory', UserAuthFactory);
+myApp.factory('TokenInterceptor', TokenInterceptor);
+
+function AuthenticationFactory($window) {
 
     return auth = {
         isLogged: false,
@@ -12,9 +16,9 @@ myApp.factory('AuthenticationFactory', function($window) {
         }
     };
 
-});
+}
 
-myApp.factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory, BroadcastService) {
+function UserAuthFactory($window, $location, $http, AuthenticationFactory, BroadcastService) {
 
     return {
         login: function(username, password) {
@@ -49,9 +53,9 @@ myApp.factory('UserAuthFactory', function($window, $location, $http, Authenticat
         username: AuthenticationFactory.user
     }
 
-});
+}
 
-myApp.factory('TokenInterceptor', function($q, $window) {
+function TokenInterceptor($q, $window) {
 
     return {
         request: function(config) {
@@ -72,4 +76,4 @@ myApp.factory('TokenInterceptor', function($q, $window) {
 
     };
 
-});
+}
