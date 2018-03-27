@@ -1,6 +1,9 @@
 let myApp = angular.module('hbwebclient', ['ngRoute']);
 
-myApp.config(function($httpProvider, $routeProvider) {
+myApp.config(configMyApp);
+myApp.run(runMyApp);
+
+function configMyApp($httpProvider, $routeProvider) {
 
     $httpProvider.interceptors.push('TokenInterceptor');
 
@@ -44,9 +47,9 @@ myApp.config(function($httpProvider, $routeProvider) {
             redirectTo: '/'
         });
 
-});
+}
 
-myApp.run(function($rootScope, $window, $location, AuthenticationFactory) {
+function runMyApp($rootScope, $window, $location, AuthenticationFactory) {
 
 // when the page refreshes, check if the user is already logged in
     AuthenticationFactory.check();
@@ -74,4 +77,4 @@ myApp.run(function($rootScope, $window, $location, AuthenticationFactory) {
 
     });
 
-});
+}
