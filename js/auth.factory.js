@@ -1,5 +1,4 @@
 myApp.factory('AuthenticationFactory', AuthenticationFactory);
-myApp.factory('UserAuthFactory', UserAuthFactory);
 myApp.factory('TokenInterceptor', TokenInterceptor);
 
 function AuthenticationFactory($window) {
@@ -7,7 +6,7 @@ function AuthenticationFactory($window) {
     return auth = {
         isLogged: false,
         check: function() {
-            if ($window.sessionStorage.token && $window.sessionStorage.user) {
+            if ($window.sessionStorage.token && $window.sessionStorage.username) {
                 this.isLogged = true;
             } else {
                 this.isLogged = false;
@@ -15,43 +14,6 @@ function AuthenticationFactory($window) {
             }
         }
     };
-
-}
-
-function UserAuthFactory($window, $location, $http, AuthenticationFactory, BroadcastService) {
-
-    return {
-        login: function(username, password) {
-
-            return $http.post('http://localhost:8887/login', {
-                username: username,
-                password: password
-            }).catch(err => {
-                console.log(err);
-            });
-
-        },
-        logout: function() {
-
-            if (AuthenticationFactory.isLogged) {
-
-                AuthenticationFactory.isLogged = false;
-                delete AuthenticationFactory.user;
-                delete AuthenticationFactory.userRole;
-
-                delete $window.sessionStorage.token;
-                delete $window.sessionStorage.user;
-                delete $window.sessionStorage.userRole;
-
-                BroadcastService.userLoggedOut();
-
-                $location.path("/login");
-
-            }
-
-        },
-        username: AuthenticationFactory.user
-    }
 
 }
 
@@ -65,7 +27,7 @@ function TokenInterceptor($q, $window) {
             if ($window.sessionStorage.token) {
 
                 config.headers['X-Access-Token'] = $window.sessionStorage.token;
-                config.headers['X-Key'] = $window.sessionStorage.user;
+                config.headers['X-Key'] = $window.sessionStorage.username;
                 config.headers['Content-Type'] = "application/json";
 
             }

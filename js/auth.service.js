@@ -5,7 +5,9 @@ function AuthService($window, $location, $http, AuthenticationFactory, Broadcast
     return {
         login,
         logout,
-        user: {}
+        user: {
+            username: $window.sessionStorage.username
+        }
     };
 
     function login(username, password) {
@@ -28,7 +30,7 @@ function AuthService($window, $location, $http, AuthenticationFactory, Broadcast
             delete AuthenticationFactory.userRole;
 
             delete $window.sessionStorage.token;
-            delete $window.sessionStorage.user;
+            delete $window.sessionStorage.username;
             delete $window.sessionStorage.userRole;
 
             BroadcastService.userLoggedOut();

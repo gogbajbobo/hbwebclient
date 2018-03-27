@@ -75,7 +75,7 @@ function runMyApp($rootScope, $window, $location, AuthenticationFactory) {
 
         } else {
 
-            if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.sessionStorage.user;
+            if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.sessionStorage.username;
             if (!AuthenticationFactory.userRole) AuthenticationFactory.userRole = $window.sessionStorage.userRole;
         }
 
