@@ -1,12 +1,12 @@
-myApp.controller("HeaderCtrl", ['$scope', '$location', 'UserAuthFactory',
+myApp.controller("HeaderCtrl", HeaderController);
 
-    ($scope, $location, UserAuthFactory) => {
+function HeaderController($scope, $location, UserAuthFactory) {
 
-        $scope.isActive = route => route === $location.path();
-        $scope.logout = () => { UserAuthFactory.logout(); }
+    $scope.isActive = route => route === $location.path();
+    $scope.logout = () => { UserAuthFactory.logout(); }
+    $scope.username = UserAuthFactory.username;
 
-    }
-]);
+}
 
 myApp.controller("HomeCtrl", ['$scope',
 
