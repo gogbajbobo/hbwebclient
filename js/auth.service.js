@@ -15,7 +15,7 @@ function AuthService($window, $location, $http, BroadcastService) {
 
     function check() {
 
-        if ($window.localStorage.token && $window.localStorage.username) {
+        if ($window.localStorage.accessToken) {
             this.isLogged = true;
         } else {
             this.isLogged = false;
@@ -33,12 +33,27 @@ function AuthService($window, $location, $http, BroadcastService) {
 
     function login(username, password) {
 
-        return $http.post('http://localhost:8887/login', {
-            username: username,
-            password: password
-        }).catch(err => {
-            console.log(err);
-        });
+        return $http
+            .post('http://localhost:8887/login', {
+                username: username,
+                password: password
+            })
+            .then(response => {
+
+                const data = response.data;
+
+                this.isLogged = true;
+                this.user = data.user;
+
+                $window.localStorage.accessToken = data.accessToken;
+                $window.localStorage.refreshToken = data.refreshToken;
+
+                BroadcastService.userLoggedIn();
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
     }
 
