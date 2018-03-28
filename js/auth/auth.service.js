@@ -26,15 +26,15 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
             this.isLogged = true;
         } else {
             this.isLogged = false;
-            flush();
+            flush(this);
         }
 
     }
-    
-    function flush() {
 
-        this.user = {};
-        this.token = undefined;
+    function flush(authService) {
+
+        authService.user = {};
+        authService.token = undefined;
         $window.localStorage.clear();
 
     }
@@ -72,7 +72,7 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
 
             this.isLogged = false;
 
-            flush();
+            flush(this);
 
             BroadcastService.userLoggedOut();
 
