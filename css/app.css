@@ -35,3 +35,14 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+
+/* ------------------------------------------------- */
+
+.w-limited {
+    max-width: 256px;
+}
+
+.contaner-content {
+    padding-bottom: 64px;
+}
