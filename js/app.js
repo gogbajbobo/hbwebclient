@@ -63,7 +63,7 @@ function configMyApp($httpProvider, $routeProvider) {
 
 }
 
-function runMyApp($rootScope, $window, $location, AuthService) {
+function runMyApp($rootScope, $location, AuthService) {
 
     AuthService.check();
 
