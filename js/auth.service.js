@@ -6,7 +6,7 @@ function AuthService($window, $location, $http, AuthenticationFactory, Broadcast
         login,
         logout,
         user: {
-            username: $window.sessionStorage.username
+            username: $window.localStorage.username
         }
     };
 
@@ -29,9 +29,9 @@ function AuthService($window, $location, $http, AuthenticationFactory, Broadcast
             delete AuthenticationFactory.user;
             delete AuthenticationFactory.userRole;
 
-            delete $window.sessionStorage.token;
-            delete $window.sessionStorage.username;
-            delete $window.sessionStorage.userRole;
+            delete $window.localStorage.token;
+            delete $window.localStorage.username;
+            delete $window.localStorage.userRole;
 
             BroadcastService.userLoggedOut();
 

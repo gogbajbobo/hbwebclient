@@ -75,8 +75,8 @@ function runMyApp($rootScope, $window, $location, AuthenticationFactory) {
 
         } else {
 
-            if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.sessionStorage.username;
-            if (!AuthenticationFactory.userRole) AuthenticationFactory.userRole = $window.sessionStorage.userRole;
+            if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.localStorage.username;
+            if (!AuthenticationFactory.userRole) AuthenticationFactory.userRole = $window.localStorage.userRole;
         }
 
     });

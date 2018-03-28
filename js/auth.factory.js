@@ -6,7 +6,7 @@ function AuthenticationFactory($window) {
     return auth = {
         isLogged: false,
         check: function() {
-            if ($window.sessionStorage.token && $window.sessionStorage.username) {
+            if ($window.localStorage.token && $window.localStorage.username) {
                 this.isLogged = true;
             } else {
                 this.isLogged = false;
@@ -24,10 +24,10 @@ function TokenInterceptor($q, $window) {
 
             config.headers = config.headers || {};
 
-            if ($window.sessionStorage.token) {
+            if ($window.localStorage.token) {
 
-                config.headers['X-Access-Token'] = $window.sessionStorage.token;
-                config.headers['X-Key'] = $window.sessionStorage.username;
+                config.headers['X-Access-Token'] = $window.localStorage.token;
+                config.headers['X-Key'] = $window.localStorage.username;
                 config.headers['Content-Type'] = "application/json";
 
             }

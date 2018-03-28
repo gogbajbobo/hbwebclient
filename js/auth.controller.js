@@ -25,9 +25,9 @@ function LoginController($scope, $window, $location, AuthenticationFactory, Broa
                 AuthenticationFactory.user = data.user.username;
                 AuthenticationFactory.userRole = data.user.role;
 
-                $window.sessionStorage.token = data.token;
-                $window.sessionStorage.username = data.user.username; // to fetch the user details on refresh
-                $window.sessionStorage.userRole = data.user.role; // to fetch the user details on refresh
+                $window.localStorage.token = data.token;
+                $window.localStorage.username = data.user.username; // to fetch the user details on refresh
+                $window.localStorage.userRole = data.user.role; // to fetch the user details on refresh
 
                 BroadcastService.userLoggedIn();
 
