@@ -3,7 +3,7 @@ myApp.factory('TokenInterceptor', TokenInterceptor);
 function TokenInterceptor($q, $window) {
 
     return {
-        request: function(config) {
+        request: config => {
 
             config.headers = config.headers || {};
 

@@ -10,14 +10,15 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
             username: $window.localStorage.username,
             role: $window.localStorage.role
         },
-        isLogged: false
+        isLogged: false,
+        token: $window.localStorage.accessToken
     };
 
     function check() {
 
-        if ($window.localStorage.accessToken) {
+        if (this.token) {
 
-            const tokenPayload = jwtHelper.decodeToken($window.localStorage.accessToken);
+            const tokenPayload = jwtHelper.decodeToken(this.token);
 
             this.user.username = tokenPayload.username;
             this.user.role = tokenPayload.role;
