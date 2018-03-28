@@ -9,12 +9,13 @@ function TokenInterceptor($injector) {
 
             if (AuthService.token) {
 
-                config.headers.Authorization = AuthService.token;
+                config.headers.Authorization = 'Bearer ' + AuthService.token;
                 // config.headers['Content-Type'] = "application/json";
 
-                console.log(config.url, config.headers);
-
             }
+
+            console.log(config.url, config.headers);
+
             return config;
 
         }

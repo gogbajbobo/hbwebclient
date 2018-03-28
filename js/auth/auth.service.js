@@ -33,7 +33,8 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
     
     function flush() {
 
-        delete this.user;
+        this.user = {};
+        this.token = undefined;
         $window.localStorage.clear();
 
     }
@@ -51,6 +52,7 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
 
                 this.isLogged = true;
                 this.user = data.user;
+                this.token = data.accessToken;
 
                 $window.localStorage.accessToken = data.accessToken;
                 $window.localStorage.refreshToken = data.refreshToken;

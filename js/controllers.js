@@ -24,8 +24,23 @@ function HeaderController($scope, $location, AuthService) {
 
 }
 
-function HomeController($scope) {
+function HomeController($scope, $http) {
+
     $scope.name = "Home Controller";
+
+    $scope.test = () => {
+
+        return $http
+            .post('http://localhost:8887/secret')
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+    };
+
 }
 
 function UserListController($scope) {
