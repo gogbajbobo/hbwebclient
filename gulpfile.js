@@ -7,7 +7,7 @@ const paths = {
   src: ['./*.html', './html/*.html', './css/*.css', './js/*.js']
 };
 
-gulp.task('connect', function() {
+gulp.task('connect', () => {
   connect.server({
     root: paths.app,
     livereload: true,
@@ -15,12 +15,12 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('html', function() {
+gulp.task('html', () => {
   gulp.src(paths.src)
     .pipe(connect.reload());
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   gulp.watch([paths.src], ['html']);
 });
 

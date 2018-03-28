@@ -23,21 +23,21 @@ function configMyApp($httpProvider, $routeProvider) {
 
     $routeProvider
         .when('/login', {
-            templateUrl: 'html/login.html',
+            templateUrl: 'html/pages/login.html',
             controller: 'LoginCtrl',
             access: {
                 requiredLogin: false
             }
         })
         .when('/', {
-            templateUrl: 'html/home.html',
+            templateUrl: 'html/pages/home.html',
             controller: 'HomeCtrl',
             access: {
                 requiredLogin: true
             }
         })
         .when('/userlist', {
-            templateUrl: 'html/userlist.html',
+            templateUrl: 'html/pages/userlist.html',
             controller: 'UserListCtrl',
             access: {
                 requiredLogin: true
