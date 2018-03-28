@@ -36,27 +36,13 @@ function configMyApp($httpProvider, $routeProvider) {
                 requiredLogin: true
             }
         })
-        // .when('/userlist', {
-        //     templateUrl: 'html/userlist.html',
-        //     controller: 'UserListCtrl',
-        //     access: {
-        //         requiredLogin: true
-        //     }
-        // })
-        // .when('/page2', {
-        //     templateUrl: 'html/page2.html',
-        //     controller: 'Page2Ctrl',
-        //     access: {
-        //         requiredLogin: true
-        //     }
-        // })
-        // .when('/page3', {
-        //     templateUrl: 'html/page3.html',
-        //     controller: 'Page3Ctrl',
-        //     access: {
-        //         requiredLogin: true
-        //     }
-        // })
+        .when('/userlist', {
+            templateUrl: 'html/userlist.html',
+            controller: 'UserListCtrl',
+            access: {
+                requiredLogin: true
+            }
+        })
         .otherwise({
             redirectTo: '/'
         });
