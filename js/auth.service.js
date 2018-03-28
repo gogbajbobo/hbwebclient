@@ -1,14 +1,35 @@
 myApp.service('AuthService', AuthService);
 
-function AuthService($window, $location, $http, AuthenticationFactory, BroadcastService) {
+function AuthService($window, $location, $http, BroadcastService) {
 
     return {
+        check,
         login,
         logout,
         user: {
-            username: $window.localStorage.username
-        }
+            username: $window.localStorage.username,
+            userRole: $window.localStorage.userRole
+        },
+        isLogged: false
     };
+
+    function check() {
+
+        if ($window.localStorage.token && $window.localStorage.username) {
+            this.isLogged = true;
+        } else {
+            this.isLogged = false;
+            flush();
+        }
+
+    }
+    
+    function flush() {
+
+        delete this.user;
+        $window.localStorage.clear();
+
+    }
 
     function login(username, password) {
 
@@ -23,15 +44,11 @@ function AuthService($window, $location, $http, AuthenticationFactory, Broadcast
 
     function logout() {
 
-        if (AuthenticationFactory.isLogged) {
+        if (this.isLogged) {
 
-            AuthenticationFactory.isLogged = false;
-            delete AuthenticationFactory.user;
-            delete AuthenticationFactory.userRole;
+            this.isLogged = false;
 
-            delete $window.localStorage.token;
-            delete $window.localStorage.username;
-            delete $window.localStorage.userRole;
+            flush();
 
             BroadcastService.userLoggedOut();
 

@@ -1,11 +1,6 @@
 myApp.controller('LoginCtrl', LoginController);
 
-function LoginController($scope, $window, $location, AuthenticationFactory, BroadcastService, AuthService) {
-
-    // $scope.user = {
-    //     // username: 'grimax',
-    //     // password: '12345'
-    // };
+function LoginController($scope, $window, $location, BroadcastService, AuthService) {
 
     $scope.login = () => {
 
@@ -21,9 +16,7 @@ function LoginController($scope, $window, $location, AuthenticationFactory, Broa
 
                 AuthService.user = data.user;
 
-                AuthenticationFactory.isLogged = true;
-                AuthenticationFactory.user = data.user.username;
-                AuthenticationFactory.userRole = data.user.role;
+                AuthService.isLogged = true;
 
                 $window.localStorage.token = data.token;
                 $window.localStorage.username = data.user.username; // to fetch the user details on refresh

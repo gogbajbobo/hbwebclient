@@ -63,30 +63,26 @@ function configMyApp($httpProvider, $routeProvider) {
 
 }
 
-function runMyApp($rootScope, $window, $location, AuthenticationFactory) {
+function runMyApp($rootScope, $window, $location, AuthService) {
 
-    AuthenticationFactory.check();
+    AuthService.check();
 
     $rootScope.$on("$routeChangeStart", (event, nextRoute, currentRoute) => {
 
-        if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthenticationFactory.isLogged) {
+        if ((nextRoute.access && nextRoute.access.requiredLogin) && !AuthService.isLogged) {
 
             $location.path("/login");
 
-        } else {
-
-            if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.localStorage.username;
-            if (!AuthenticationFactory.userRole) AuthenticationFactory.userRole = $window.localStorage.userRole;
         }
 
     });
 
     $rootScope.$on('$routeChangeSuccess', (event, nextRoute, currentRoute) => {
 
-        $rootScope.showMenu = AuthenticationFactory.isLogged;
-        $rootScope.role = AuthenticationFactory.userRole;
+        $rootScope.showMenu = AuthService.isLogged;
+        $rootScope.role = AuthService.user.userRole;
 
-        if (AuthenticationFactory.isLogged === true && $location.path() === '/login') {
+        if (AuthService.isLogged === true && $location.path() === '/login') {
             $location.path('/');
         }
 

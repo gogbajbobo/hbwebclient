@@ -1,21 +1,4 @@
-myApp.factory('AuthenticationFactory', AuthenticationFactory);
 myApp.factory('TokenInterceptor', TokenInterceptor);
-
-function AuthenticationFactory($window) {
-
-    return auth = {
-        isLogged: false,
-        check: function() {
-            if ($window.localStorage.token && $window.localStorage.username) {
-                this.isLogged = true;
-            } else {
-                this.isLogged = false;
-                delete this.user;
-            }
-        }
-    };
-
-}
 
 function TokenInterceptor($q, $window) {
 
