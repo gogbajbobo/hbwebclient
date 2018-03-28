@@ -1,4 +1,4 @@
-const myApp = angular.module('hbwebclient', ['ngRoute']);
+const myApp = angular.module('hbwebclient', ['ngRoute', 'angular-jwt']);
 
 myApp.config(configMyApp);
 myApp.run(runMyApp);

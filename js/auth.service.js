@@ -1,6 +1,6 @@
 myApp.service('AuthService', AuthService);
 
-function AuthService($window, $location, $http, BroadcastService) {
+function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
 
     return {
         check,
@@ -16,6 +16,10 @@ function AuthService($window, $location, $http, BroadcastService) {
     function check() {
 
         if ($window.localStorage.accessToken) {
+
+            const tokenPayload = jwtHelper.decodeToken($window.localStorage.accessToken);
+
+            this.user.username = tokenPayload.username;
             this.isLogged = true;
         } else {
             this.isLogged = false;
