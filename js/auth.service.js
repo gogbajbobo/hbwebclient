@@ -8,7 +8,7 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
         logout,
         user: {
             username: $window.localStorage.username,
-            userRole: $window.localStorage.userRole
+            role: $window.localStorage.role
         },
         isLogged: false
     };
@@ -20,6 +20,8 @@ function AuthService($window, $location, $http, BroadcastService, jwtHelper) {
             const tokenPayload = jwtHelper.decodeToken($window.localStorage.accessToken);
 
             this.user.username = tokenPayload.username;
+            this.user.role = tokenPayload.role;
+
             this.isLogged = true;
         } else {
             this.isLogged = false;

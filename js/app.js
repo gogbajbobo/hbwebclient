@@ -80,7 +80,7 @@ function runMyApp($rootScope, $window, $location, AuthService) {
     $rootScope.$on('$routeChangeSuccess', (event, nextRoute, currentRoute) => {
 
         $rootScope.showMenu = AuthService.isLogged;
-        $rootScope.role = AuthService.user.userRole;
+        $rootScope.role = AuthService.user.role;
 
         if (AuthService.isLogged === true && $location.path() === '/login') {
             $location.path('/');
